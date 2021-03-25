@@ -1,0 +1,558 @@
+Option Explicit
+
+Public lrow1 As Long
+Public lcol1 As Long
+
+Public sourcearray As Variant
+
+Public Const saleno As String = "lot_salenum"
+Public saleno_colref1 As Long
+Public Const saleno_proper As String = "Sale No."
+Public saleno_colref2 As Long
+
+Public Const oc As String = "lot_ownercode"
+Public oc_colref1 As Long
+Public oc_colref2 As Long
+
+Public Const schedule1 As String = "lot_schdla1"
+Public schedule1_colref1 As Long
+Public schedule1_colref2 As Long
+
+Public Const schedule2 As String = "lot_compschdla"
+Public schedule2_colref1 As Long
+Public schedule2_colref2 As Long
+
+Public Const lotno As String = "lot_num"
+Public lotno_colref1 As Long
+Public lotno_colref2 As Long
+
+Public Const alot As String = "lot_nummod"
+Public alot_colref1 As Long
+Public alot_colref2 As Long
+
+Public Const buyerno As String = "lot_bidnum"
+Public buyerno_colref1 As Long
+Public Const buyerno_proper As String = "Buyer No."
+Public buyerno_colref2 As Long
+
+Public Const yearmanu As String = "lot_yrofmanuf"
+Public yearmanu_colref1 As Long
+Public Const yearmanu_proper As String = "Year"
+Public yearmanu_colref2 As Long
+
+Public Const make As String = "lot_manuf_aliase"
+Public make_colref1 As Long
+Public Const make_proper As String = "Make"
+Public make_colref2 As Long
+
+Public Const modelname As String = "lot_model_name"
+Public modelname_colref1 As Long
+Public modelname_colref2 As Long
+
+Public Const modeltype As String = "lot_model_desc"
+Public modeltype_colref1 As Long
+Public modeltype_colref2 As Long
+
+Public Const eqptcode As String = "lot_eqgrpcode"
+Public eqptcode_colref1 As Long
+Public Const eqptcode_proper As String = "Eqpt. Code"
+Public eqptcode_colref2 As Long
+
+Public Const eqpttype As String = "lot_eqtype"
+Public eqpttype_colref1 As Long
+Public Const eqpttype_proper As String = "Eqpt Type"
+Public eqpttype_colref2 As Long
+
+Public Const serial As String = "lot_shortdescline2"
+Public serial_colref1 As Long
+Public Const serial_proper As String = "Serial No."
+Public serial_colref2 As Long
+
+Public Const origin As String = "lot_origin"
+Public origin_colref1 As Long
+Public origin_colref2 As Long
+
+Public Const licenseorigin As String = "lot_licenseplate"
+Public licenseorigin_colref1 As Long
+Public Const licenseorigin_proper As String = "License Origin"
+Public licenseorigin_colref2 As Long
+
+Public Const hscode As String = "lot_comoditycode"
+Public hscode_colref1 As Long
+Public Const hscode_proper As String = "HS Code"
+Public hscode_colref2 As Long
+
+Public Const lotweight As String = "lot_weight"
+Public lotweight_colref1 As Long
+Public lotweight_colref2 As Long
+
+Public Const tax1 As String = "lot_tax1"
+Public tax1_colref1 As Long
+Public Const tax1_proper As String = "Tax 1"
+Public tax1_colref2 As Long
+
+Public Const tax2 As String = "lot_tax2"
+Public tax2_colref1 As Long
+Public tax2_colref2 As Long
+
+Public Const numoftitle As String = "lot_numoftitles"
+Public numoftitle_colref1 As Long
+Public numoftitle_colref2 As Long
+
+Public Const inyard As String = "lot_inyard"
+Public inyard_colref1 As Long
+Public Const inyard_proper As String = "In Yard"
+Public inyard_colref2 As Long
+
+Public Const inyarddate As String = "lot_inyard_date"
+Public inyarddate_colref1 As Long
+Public inyarddate_colref2 As Long
+
+Public Const titleinhand As String = "lot_titleinhand"
+Public titleinhand_colref1 As Long
+Public Const titleinhand_proper As String = "Title In hand"
+Public titleinhand_colref2 As Long
+
+Public Const titlechecked As String = "lot_titlechecked"
+Public titlechecked_colref1 As Long
+Public Const titlechecked_proper As String = "Title Checked"
+Public titlechecked_colref2 As Long
+
+Public Const impdocnum As String = "lot_importdocnum"
+Public impdocnum_colref1 As Long
+Public impdocnum_colref2 As Long
+
+Public Const impdocdate As String = "lot_importdocissuedate"
+Public impdocdate_colref1 As Long
+Public impdocdate_colref2 As Long
+
+Public Const expdocnum As String = "lot_exportdocnum"
+Public expdocnum_colref1 As Long
+Public expdocnum_colref2 As Long
+
+Public Const shootprice As String = "lot_shootprice"
+Public shootprice_colref1 As Long
+Public shootprice_colref2 As Long
+
+Public Const soldprice As String = "lot_soldprice"
+Public soldprice_colref1 As Long
+Public soldprice_colref2 As Long
+
+Public Const comes_with As String = "lot_completewithdesc"
+Public comes_with_colref1 As Long
+Public Const comes_with_proper As String = "Comes With"
+Public comes_with_colref2 As Long
+
+Public Const catnotes As String = "lot_catnotes"
+Public catnotes_colref1 As Long
+Public Const catnotes_proper As String = "Catalogue Notes"
+Public catnotes_colref2 As Long
+
+Public Const obnotes As String = "lot_ownnotes"
+Public obnotes_colref1 As Long
+Public Const obnotes_proper As String = "O/B notes"
+Public obnotes_colref2 As Long
+
+Public Const lot_day As String = "lot_day"
+Public lot_day_colref1 As Long
+Public lot_day_colref2 As Long
+
+Public Const delete1 As String = "lot_recdeletetag"
+Public delete1_colref1 As Long
+Public delete1_colref2 As Long
+
+Public Const delete1_reason As String = "lot_deletereason"
+Public delete1_reason_colref1 As Long
+Public delete1_reason_colref2 As Long
+
+Public Const delete2 As String = "deleteflag"
+Public delete2_colref1 As Long
+Public delete2_colref2 As Long
+
+
+
+'added columns in source sheet before making array
+
+Public Const oc_sort As String = "O/C sort"
+Public oc_sort_colref1 As Long
+Public oc_sort_colref2 As Long
+
+'added columns in all columns result sheet
+Public sourcefiledatetime As Date
+
+Public Const sourcefileinfo As String = "Source file date/time"
+Public sourcefileinfo_colref2 As Long
+
+Public Const oc_sch As String = "O/C & Sch."
+Public oc_sch_colref2 As Long
+
+Public Const lotnofull As String = "Lot No."
+Public lotnofull_colref2 As Long
+
+Public Const itemdesc As String = "Full description"
+Public itemdesc_colref1 As Long
+Public itemdesc_colref2 As Long
+
+Public Const tm As String = "TM Name"
+Public tm_colref2 As Long
+
+Public Const seller_company As String = "Consignor Company"
+Public seller_company_colref2 As Long
+
+Public Const seller_name As String = "Consignor Name"
+Public seller_name_colref2 As Long
+
+Public Const csm As String = "CSM"
+Public csm_colref2 As Long
+
+Public Const category As String = "Category"
+Public category_colref2 As Long
+
+Public Const category_check As String = "Category Check"
+Public category_check_colref2 As Long
+
+'added column in all columns result sheet for sales letter sheet: arabic buyer name
+Public Const buyer_name As String = "Buyer Name"
+Public buyer_name_colref2 As Long
+
+'added column in all columns result sheet for sales letter sheet: arabic make
+Public Const make_arabic As String = "Arabic Make"
+Public make_arabic_colref2 As Long
+
+'added column in all columns result sheet for sales letter sheet: model name and desc. combined
+Public Const model_name_desc As String = "Model Name & Desc."
+Public model_name_desc_colref1 As Long
+Public model_name_desc_colref2 As Long
+
+'added column in all columns result sheet for sales letter sheet: arabic type
+Public Const type_arabic As String = "Arabic Type"
+Public type_arabic_colref2 As Long
+
+
+'not using below variables as it is same as delete1 reason in column EE
+'Public Const delete2_reason As String = "lot_deletereason"
+'Public delete2_reason_colref1 As Long
+'Public delete2_reason_colref2 As Long
+
+
+
+Public columnerror As String
+
+'for resultsheet
+Public wb As Workbook
+Public ResultSheet As Worksheet
+Private Sub GetSaleSiteData()
+
+    Set wb = ActiveWorkbook
+
+    '************************
+    'get data from sale site & create array
+
+    Dim FileToOpen As Variant
+
+    'Application.ScreenUpdating = False
+
+    FileToOpen = Application.GetOpenFilename(Title:="Select the Sale Site Excel Data")
+
+    If FileToOpen = False Then
+        Exit Sub
+    Else
+
+        Dim openbook As Workbook
+        Set openbook = Application.Workbooks.Open(FileToOpen)
+
+        Dim sourcefilename As String
+        sourcefilename = Dir(FileToOpen)
+        sourcefiledatetime = FileDateTime(FileToOpen)
+
+        Dim sourcesheet As Worksheet
+        Set sourcesheet = Workbooks(sourcefilename).Worksheets(1)
+
+        'this deleting of row is for sale site report
+        If Cells(2, 1) = "" Then
+            Rows("2:2").Delete
+        End If
+
+    End If
+
+    '************************
+    'get info for array
+
+    Dim i As Long
+
+    columnerror = saleno
+    On Error GoTo columnerror
+    saleno_colref1 = Range("1:1").Find(saleno, Lookat:=xlWhole).Column
+    On Error GoTo 0
+
+    columnerror = oc
+    On Error GoTo columnerror
+    oc_colref1 = Range("1:1").Find(oc, Lookat:=xlWhole).Column
+    On Error GoTo 0
+
+    columnerror = schedule1
+    On Error GoTo columnerror
+    schedule1_colref1 = Range("1:1").Find(schedule1, Lookat:=xlWhole).Column
+    On Error GoTo 0
+    
+    columnerror = schedule2
+    On Error GoTo columnerror
+    schedule2_colref1 = Range("1:1").Find(schedule2, Lookat:=xlWhole).Column
+    On Error GoTo 0
+
+    columnerror = lotno
+    On Error GoTo columnerror
+    lotno_colref1 = Range("1:1").Find(lotno, Lookat:=xlWhole).Column
+    On Error GoTo 0
+    
+    columnerror = alot
+    On Error GoTo columnerror
+    alot_colref1 = Range("1:1").Find(alot, Lookat:=xlWhole).Column
+    On Error GoTo 0
+    
+    columnerror = lot_day
+    On Error GoTo columnerror
+    lot_day_colref1 = Range("1:1").Find(lot_day, Lookat:=xlWhole).Column
+    On Error GoTo 0
+    
+    columnerror = buyerno
+    On Error GoTo columnerror
+    buyerno_colref1 = Range("1:1").Find(buyerno, Lookat:=xlWhole).Column
+    On Error GoTo 0
+
+    columnerror = yearmanu
+    On Error GoTo columnerror
+    yearmanu_colref1 = Range("1:1").Find(yearmanu, Lookat:=xlWhole).Column
+    On Error GoTo 0
+
+    columnerror = make
+    On Error GoTo columnerror
+    make_colref1 = Range("1:1").Find(make, Lookat:=xlWhole).Column
+    On Error GoTo 0
+
+    columnerror = modelname
+    On Error GoTo columnerror
+    modelname_colref1 = Range("1:1").Find(modelname, Lookat:=xlWhole).Column
+    On Error GoTo 0
+
+    columnerror = modeltype
+    On Error GoTo columnerror
+    modeltype_colref1 = Range("1:1").Find(modeltype, Lookat:=xlWhole).Column
+    On Error GoTo 0
+
+    columnerror = eqptcode
+    On Error GoTo columnerror
+    eqptcode_colref1 = Range("1:1").Find(eqptcode, Lookat:=xlWhole).Column
+    On Error GoTo 0
+
+    columnerror = eqpttype
+    On Error GoTo columnerror
+    eqpttype_colref1 = Range("1:1").Find(eqpttype, Lookat:=xlWhole).Column
+    On Error GoTo 0
+
+    columnerror = serial
+    On Error GoTo columnerror
+    serial_colref1 = Range("1:1").Find(serial, Lookat:=xlWhole).Column
+    On Error GoTo 0
+
+    columnerror = origin
+    On Error GoTo columnerror
+    origin_colref1 = Range("1:1").Find(origin, Lookat:=xlWhole).Column
+    On Error GoTo 0
+
+    columnerror = licenseorigin
+    On Error GoTo columnerror
+    licenseorigin_colref1 = Range("1:1").Find(licenseorigin, Lookat:=xlWhole).Column
+    On Error GoTo 0
+
+    columnerror = hscode
+    On Error GoTo columnerror
+    hscode_colref1 = Range("1:1").Find(hscode, Lookat:=xlWhole).Column
+    On Error GoTo 0
+
+    columnerror = lotweight
+    On Error GoTo columnerror
+    lotweight_colref1 = Range("1:1").Find(lotweight, Lookat:=xlWhole).Column
+    On Error GoTo 0
+
+    columnerror = tax1
+    On Error GoTo columnerror
+    tax1_colref1 = Range("1:1").Find(tax1, Lookat:=xlWhole).Column
+    On Error GoTo 0
+
+    columnerror = tax2
+    On Error GoTo columnerror
+    tax2_colref1 = Range("1:1").Find(tax2, Lookat:=xlWhole).Column
+    On Error GoTo 0
+
+    columnerror = numoftitle
+    On Error GoTo columnerror
+    numoftitle_colref1 = Range("1:1").Find(numoftitle, Lookat:=xlWhole).Column
+    On Error GoTo 0
+
+    columnerror = inyard
+    On Error GoTo columnerror
+    inyard_colref1 = Range("1:1").Find(inyard, Lookat:=xlWhole).Column
+    On Error GoTo 0
+
+    columnerror = inyarddate
+    On Error GoTo columnerror
+    inyarddate_colref1 = Range("1:1").Find(inyarddate, Lookat:=xlWhole).Column
+    On Error GoTo 0
+
+    columnerror = titleinhand
+    On Error GoTo columnerror
+    titleinhand_colref1 = Range("1:1").Find(titleinhand, Lookat:=xlWhole).Column
+    On Error GoTo 0
+
+    columnerror = titlechecked
+    On Error GoTo columnerror
+    titlechecked_colref1 = Range("1:1").Find(titlechecked, Lookat:=xlWhole).Column
+    On Error GoTo 0
+
+    columnerror = impdocnum
+    On Error GoTo columnerror
+    impdocnum_colref1 = Range("1:1").Find(impdocnum, Lookat:=xlWhole).Column
+    On Error GoTo 0
+
+    columnerror = impdocdate
+    On Error GoTo columnerror
+    impdocdate_colref1 = Range("1:1").Find(impdocdate, Lookat:=xlWhole).Column
+    On Error GoTo 0
+
+    columnerror = expdocnum
+    On Error GoTo columnerror
+    expdocnum_colref1 = Range("1:1").Find(expdocnum, Lookat:=xlWhole).Column
+    On Error GoTo 0
+
+    columnerror = shootprice
+    On Error GoTo columnerror
+    shootprice_colref1 = Range("1:1").Find(shootprice, Lookat:=xlWhole).Column
+    On Error GoTo 0
+
+    columnerror = soldprice
+    On Error GoTo columnerror
+    soldprice_colref1 = Range("1:1").Find(soldprice, Lookat:=xlWhole).Column
+    On Error GoTo 0
+
+    columnerror = comes_with
+    On Error GoTo columnerror
+    comes_with_colref1 = Range("1:1").Find(comes_with, Lookat:=xlWhole).Column
+    On Error GoTo 0
+
+    columnerror = catnotes
+    On Error GoTo columnerror
+    catnotes_colref1 = Range("1:1").Find(catnotes, Lookat:=xlWhole).Column
+    On Error GoTo 0
+
+    columnerror = obnotes
+    On Error GoTo columnerror
+    obnotes_colref1 = Range("1:1").Find(obnotes, Lookat:=xlWhole).Column
+    On Error GoTo 0
+
+    columnerror = delete1
+    On Error GoTo columnerror
+    delete1_colref1 = Range("1:1").Find(delete1, Lookat:=xlWhole).Column
+    On Error GoTo 0
+
+    columnerror = delete1_reason
+    On Error GoTo columnerror
+    delete1_reason_colref1 = Range("1:1").Find(delete1_reason, Lookat:=xlWhole).Column
+    On Error GoTo 0
+
+    columnerror = delete2
+    On Error GoTo columnerror
+    delete2_colref1 = Range("1:1").Find(delete2, Lookat:=xlWhole).Column
+    On Error GoTo 0
+    
+'    Dim lrow1 As Long
+'    Dim lcol1 As Long
+    lrow1 = sourcesheet.Cells(Rows.Count, 1).End(xlUp).Row
+    lcol1 = sourcesheet.Cells(1, Columns.Count).End(xlToLeft).Column
+    
+    'adding o/c sort column and data
+    lcol1 = lcol1 + 1
+    sourcesheet.Cells(1, lcol1).Value = oc_sort
+    oc_sort_colref1 = Range("1:1").Find(oc_sort, Lookat:=xlWhole).Column
+    sourcesheet.Cells(2, lcol1).Formula = "=CONCATENATE(RIGHT(" & sourcesheet.Cells(2, oc_colref1).Address(rowabsolute:=False, columnabsolute:=False) & ",LEN(" & sourcesheet.Cells(2, oc_colref1).Address(rowabsolute:=False, columnabsolute:=False) & ")-1),LEFT(" & sourcesheet.Cells(2, oc_colref1).Address(rowabsolute:=False, columnabsolute:=False) & ",1))"
+    sourcesheet.Cells(2, lcol1).Copy
+    sourcesheet.Range(Cells(3, lcol1), Cells(lrow1, lcol1)).PasteSpecial (xlPasteAll)
+    Application.CutCopyMode = False
+
+    'adding full description column and data
+    lcol1 = lcol1 + 1
+    sourcesheet.Cells(1, lcol1).Value = itemdesc
+    itemdesc_colref1 = Range("1:1").Find(itemdesc, Lookat:=xlWhole).Column
+    
+    sourcesheet.Cells(2, lcol1).Formula = "=CONCATENATE(" & sourcesheet.Cells(2, yearmanu_colref1).Address(rowabsolute:=False, columnabsolute:=False) _
+    & ", "" ""," & sourcesheet.Cells(2, make_colref1).Address(rowabsolute:=False, columnabsolute:=False) _
+    & ", "" ""," & sourcesheet.Cells(2, modelname_colref1).Address(rowabsolute:=False, columnabsolute:=False) _
+    & ", "" ""," & sourcesheet.Cells(2, modeltype_colref1).Address(rowabsolute:=False, columnabsolute:=False) _
+    & ", "" ""," & sourcesheet.Cells(2, eqpttype_colref1).Address(rowabsolute:=False, columnabsolute:=False) _
+    & ", "" ""," & sourcesheet.Cells(2, serial_colref1).Address(rowabsolute:=False, columnabsolute:=False) _
+    & ")"
+    
+    sourcesheet.Cells(2, lcol1).Copy
+    sourcesheet.Range(Cells(3, lcol1), Cells(lrow1, lcol1)).PasteSpecial (xlPasteAll)
+    Application.CutCopyMode = False
+   
+    sourcearray = sourcesheet.Range(Cells(1, 1), Cells(lrow1, lcol1))
+    openbook.Close False
+
+'see public declaration section for notes regarding below codes
+'    columnerror = delete2_reason
+'    For i = 1 To lcol1
+'        If sourcearray(1, i) = delete2_reason Then
+'            delete2_reason_colref1 = i
+'            Exit For
+'        End If
+'    Next i
+'    If delete2_reason_colref1 = 0 Then
+'        GoTo columnerror
+'    End If
+
+    '************************
+    'check result sheet
+
+    Dim ResultReportSheet As Boolean
+    For i = 1 To wb.Worksheets.Count
+        If wb.Worksheets(i).Name = resultsheetname Then
+            ResultReportSheet = True
+        End If
+    Next i
+
+    If ResultReportSheet = True Then
+
+        wb.Worksheets(resultsheetname).Move after:=wb.Worksheets(3)
+        wb.Worksheets(resultsheetname).Activate
+
+        On Error Resume Next
+            wb.Worksheets(resultsheetname).ShowAllData
+        On Error GoTo 0
+
+        With wb.Worksheets(resultsheetname).Cells
+            .ClearContents
+            .ClearFormats
+        End With
+
+        wb.Worksheets(resultsheetname).Range(Cells(1, 1), Cells(Rows.Count, Columns.Count)).Delete
+        wb.Worksheets(resultsheetname).Cells(1, 1).Select
+
+    Else
+        Sheets.Add(after:=Sheets(3)).Name = resultsheetname
+    End If
+
+    Set ResultSheet = wb.Worksheets(resultsheetname)
+
+    Exit Sub
+
+    '************************
+    'error handling
+
+
+columnerror:
+    MsgBox "" & "'" & columnerror & "'" & " column not found."
+    Exit Sub
+
+    End Sub
+
