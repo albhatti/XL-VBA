@@ -1,0 +1,87 @@
+
+Option Explicit
+   Public resultsheetname As String
+   
+   
+Private Sub all_report_selection()
+    
+        Dim RBAForm As UserForm
+        Set RBAForm = Usr_Frm1
+        
+        resultsheetname = RBAForm.LstBx_Rpt.Value
+        
+        Unload RBAForm
+        
+        Application.Run "ss_01b.GetSaleSiteData"
+        
+        If IsEmpty(sourcearray) = True Then
+            Exit Sub
+        Else
+            If resultsheetname = "SS - All columns" Then
+                Application.Run "ss_all_columns.all_columns_report"
+            
+            ElseIf resultsheetname = "SS - Post sale box checking" Then
+                Application.Run "ss_box_check.box_check"
+                
+            ElseIf resultsheetname = "SS - Duties" Then
+                Application.Run "ss_duties_check.duties_check"
+                
+            ElseIf resultsheetname = "SS - HS Codes" Then
+                Application.Run "ss_hs_code_missing.hs_code_missing"
+                
+            ElseIf resultsheetname = "SS - Dec. No. checking" Then
+                Application.Run "ss_imp_doc_num_check.import_doc_num_check"
+                
+            ElseIf resultsheetname = "SS - Imp. Doc. Date checking" Then
+                Application.Run "ss_incoming_dates_check.incoming_dates_check"
+                
+            ElseIf resultsheetname = "SS - LGP No. checking" Then
+                Application.Run "ss_lgp_missing.lgp_missing"
+                
+            ElseIf resultsheetname = "SS - Origin match" Then
+                Application.Run "ss_origin_match.origin_match"
+            
+            ElseIf resultsheetname = "SS - Origin missing" Then
+                Application.Run "ss_origin_missing.origin_missing"
+
+            ElseIf resultsheetname = "SS - Tax invoice" Then
+                Application.Run "ss_tax_invoice_lot_info.tax_invoice_lot_info"
+
+            ElseIf resultsheetname = "SS - Weight" Then
+                Application.Run "ss_weight_check.weight_check"
+
+            ElseIf resultsheetname = "SS - Year 0 & docs in hand" Then
+                Application.Run "ss_year_0_docs_inhand.year_0_docs_inhand"
+
+            ElseIf resultsheetname = "SS - Year having verify or ypd" Then
+                Application.Run "ss_year_having_verify_ypd.year_having_verify_ypd"
+                
+            ElseIf resultsheetname = "SS - Sales Letters" Then
+                Application.Run "ss_salesletter.salesletter_report"
+        
+            ElseIf resultsheetname = "SS - Adding Notes" Then
+                Application.Run "ss_adding_notes.adding_notes_report"
+        
+            ElseIf resultsheetname = "SS - CONs & CAMs" Then
+                Application.Run "ss_con_cam.con_cam_report"
+            
+            ElseIf resultsheetname = "SS - Trailers" Then
+                Application.Run "ss_trailer.trailer_report"
+            
+            ElseIf resultsheetname = "SS - No docs. remark" Then
+                Application.Run "ss_no_doc_remark.no_doc_remark_report"
+            
+            ElseIf resultsheetname = "SS - Title in hand or checked" Then
+                Application.Run "ss_titleIH_checked.titleIH_checked_report"
+                
+            ElseIf resultsheetname = "SS - Post sale Eqpt. Envelopes" Then
+                Application.Run "ss_eqpt_envelope.eqpt_envelope_report"
+            
+            ElseIf resultsheetname = "SS - Customs report" Then
+                Application.Run "ss_customs.customs_report"
+                
+            End If
+        End If
+
+End Sub
+
