@@ -9,4 +9,4 @@ How this code runs is:
 1) A form is run.
 2) Main module 1 is excecuted.
 3) Main module 2 is executed as per the report type selected in the form.
-4) Report template A is executed to create the report sheet. Subsequent reprots are made based on this template by creating individual reports.
+4) Report template A is executed to create the report sheet. Subsequent reports are made based on this template by creating individual reports.
